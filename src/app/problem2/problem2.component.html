@@ -1,0 +1,42 @@
+<div fxLayout="column" fxLayoutGap="20px">
+    <h1>Problema # 2</h1>
+    <form #formProblem2="ngForm" autocomplete="off" (ngSubmit)="result(formProblem2)">
+        <div fxLayout="row" fxLayoutGap="20px">
+            <mat-form-field hintLabel="Insira 1er número binário" appearance="fill">
+                <mat-label>Insira um binário</mat-label>
+                <input matInput #input1 maxlength="8" placeholder="Número binário 1" (keyup)="applyFilter1($event)" name="bin1" [(ngModel)]="binario1" required minlength="8">
+                <mat-hint align="end">{{input1.value?.length || 0}}/8</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Selecione u operador</mat-label>
+                <select matNativeControl [(ngModel)]="operador" name="operator" required>
+                  <option value="+"selected>+</option>
+                  <option value="-">-</option>
+                  <option value="*">*</option>
+                  <option value="/">/</option>
+                  <option value="%">%</option>
+                </select>
+            </mat-form-field>
+
+            <mat-form-field hintLabel="Insira 2do número binário" appearance="fill">
+                <mat-label>Insira um binário</mat-label>
+                <input matInput #input2 maxlength="8" placeholder="Número binário 2" (keyup)="applyFilter2($event)" name="bin2" [(ngModel)]="binario2" required minlength="8">
+                <mat-hint align="end">{{input2.value?.length || 0}}/8</mat-hint>
+            </mat-form-field>
+            <button mat-mini-fab color="accent" type="submit">=</button>
+        </div>
+    </form>
+    <div *ngIf="isResult">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    Saída
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <span>{{binarioRes}}</span>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

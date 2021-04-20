@@ -1,0 +1,64 @@
+<div fxLayout="column" fxLayoutGap="20px">
+    <h1>Problema # 1</h1>
+    <form (ngSubmit)="onSubmit1(form1)" autocomplete="off" #form1="ngForm">
+        <div fxLayout="row" fxLayoutGap="20px" *ngIf="!next">
+            <div fxLayout="column">
+                <mat-form-field>
+                    <mat-label>Insira um número de entradas</mat-label>
+                    <input matInput type="number" placeholder="1<= Rango >=1000" name="numList" [(ngModel)]="tam" required min="1" max="1000">
+                </mat-form-field>
+                <span *ngIf="!(tam >= 1 && tam <= 1000)" class="form-text text-danger">
+                    É obrigatório e possui um intervalo 1 e 1000
+                </span>
+            </div>
+            <button mat-mini-fab color="accent" type="button" (click)="next = !next">next</button>
+        </div>
+        <div fxLayout="column" *ngIf="next">
+            <div fxLayout="row" fxLayoutGap="20px">
+                <button mat-mini-fab color="primary" type="button" (click)="next = !next">back</button>
+                <div fxLayout="column">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Insira um valor</mat-label>
+                        <input matInput type="number" placeholder="1000<= Rango >=1000" name="numList" [(ngModel)]="added" min="-1000" max="1000">
+                    </mat-form-field>
+                    <span *ngIf="!(added >= -1000 && added <= 1000)" class="form-text text-danger">
+                        Possui um intervalo -1000 e 1000
+                    </span>
+                </div>
+                <button mat-mini-fab color="accent" type="button" (click)="addList()" *ngIf="listIn.length < tam">Add</button>
+                <button mat-mini-fab color="primary" type="submit" *ngIf="listIn.length == tam">Result</button>
+            </div>
+            <div fxLayout="row" fxLayoutGap="20px">
+                <div fxLayout="column" fxLayoutGap="20px">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>
+                                Entrada: {{ listIn.length }}/{{ tam }}
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <ol>
+                                <li *ngFor="let item of listIn">{{ item }}</li>
+                            </ol>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div fxLayout="column" fxLayoutGap="20px" *ngIf="listOut.length > 0">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>
+                                Saída
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <ol>
+                                <li *ngFor="let item of listOut">{{ item }}</li>
+                            </ol>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
